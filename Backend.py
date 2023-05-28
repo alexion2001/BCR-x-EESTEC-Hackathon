@@ -1,27 +1,31 @@
 from flask import Flask, jsonify, request
-from calcul_sume import sume as sume_calculate
+from calcul_sume import sume as sume_calculate, calculProcent
 
 app = Flask(__name__)
 
-@app.route('/income', methods=['GET'])
+@app.route('/titular', methods=['GET'])
+def get_titular():
+    return jsonify({'titular': 'Cristian Dinu'})
+
+@app.route('/venit', methods=['GET'])
 def get_income():
-    return jsonify({'income': sume_calculate['venituri']})
+    return jsonify({'venit': sume_calculate[1]})
 
-@app.route('/food', methods=['GET'])
+@app.route('/mancare', methods=['GET'])
 def get_food():
-    return jsonify({'food': sume_calculate['mancare']})
+    return jsonify({'mancare': calculProcent(2)})
 
-@app.route('/household', methods=['GET'])
+@app.route('/casa', methods=['GET'])
 def get_household():
-    return jsonify({'household': sume_calculate['casa']})
+    return jsonify({'casa': calculProcent(3)})
 
 @app.route('/transport', methods=['GET'])
 def get_transport():
-    return jsonify({'transport': sume_calculate['transport']})
+    return jsonify({'transport': calculProcent(4)})
 
-@app.route('/others', methods=['GET'])
+@app.route('/diverse', methods=['GET'])
 def get_others():
-    return jsonify({'others': sume_calculate['diverse']})
+    return jsonify({'diverse': calculProcent(5)})
 
 if __name__ == '__main__':
     app.run()
