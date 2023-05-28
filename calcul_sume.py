@@ -1,5 +1,6 @@
+from CNN import tranzactii
+from CNN import titular,venituri
 
-f = open("test_sume.txt","r")
 sume = {
     1: 0, #venit
     2: 0, #mancare
@@ -8,10 +9,14 @@ sume = {
     5: 0  #diverse
 }
 total_chetuieli=0
-for linie in f:
-    linie_string = linie.split(",")
-    nr=[]
-    for l in linie_string:
+# for linie in f:
+#     linie_string = linie.split(",")
+#     nr=[]
+#     for l in linie_string:
+#         nr.append(float(l))
+for tranz in tranzactii:
+    nr = []
+    for l in tranz:
         nr.append(float(l))
 
     if nr[1]==-1:
@@ -30,7 +35,8 @@ def calculProcent(categorie):
     if(categorie!=1):
         for i in range(len(sume)+1):
             if categorie == i:
-                return sume[i]/total_chetuieli*100
+                return sume[i]/total_chetuieli
     else:
         return -1
 
+print(total_chetuieli)

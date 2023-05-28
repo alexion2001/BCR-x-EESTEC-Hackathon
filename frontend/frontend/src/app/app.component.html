@@ -1,0 +1,104 @@
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<div class="main">
+  <div class="header">
+    <div class="title">DASHBOARD</div>
+    <div class="client">Titular: {{titular}}</div>
+  </div>
+
+  <div class="page">
+    <div class="col1">
+      <div class="income">INCOME: {{total}} LEI</div>
+      <div class="card1">
+        <mat-card>
+          <mat-card-title> FOOD </mat-card-title>
+          <mat-card-content>
+            <mat-icon> fastfood</mat-icon>
+            <p class="sum">{{food}} lei</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="card2">
+        <mat-card>
+          <mat-card-title> HOME </mat-card-title>
+          <mat-card-content>
+            <mat-icon> home</mat-icon>
+            <p class="sum">{{home}} lei</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="card3">
+        <mat-card>
+          <mat-card-title> TRANSPORT </mat-card-title>
+          <mat-card-content>
+            <mat-icon> directions_car</mat-icon>
+            <p class="sum">{{transport}} lei</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="col2">
+      <div id = "piechart" class="piechart" style.background-image="conic-gradient({{ foodPercent }}deg, {{ homePercent }}deg, {{ transportPercent }}deg)"></div>
+      <div class="percent">
+        <div style="background-color: #739df3;">
+          FOOD: {{foodPercent}} %
+        </div>
+        <div style="background-color: #695dcb;">
+          HOME: {{homePercent}} %
+        </div>
+        <div style="background-color: #a96ce3;">
+          TRANSPORT: {{transportPercent}} %
+        </div>
+        <div style="background-color: #2e5f99;">
+          OTHERS: {{100 - foodPercent - homePercent - transportPercent}} %
+        </div>
+      </div>
+    </div>
+
+    <div class="col3">
+      <mat-card>
+        <mat-card-title> CREDIT </mat-card-title>
+        <mat-card-content>
+          <p>RATA MAXIMA:</p>
+          <p>{{rataMax}} lei</p>
+        </mat-card-content>
+      </mat-card>
+      
+    </div>
+  </div>
+</div>
+
+<script
+  type="text/javascript"
+  src="https://www.gstatic.com/charts/loader.js"
+></script>
+
+<script type="text/javascript">
+  // Load google charts
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(drawChart);
+
+  // Draw the chart and set the chart values
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ["Task", "Hours per Day"],
+      ["Work", 8],
+      ["Eat", 2],
+      ["TV", 4],
+      ["Gym", 2],
+      ["Sleep", 8],
+    ]);
+
+    // Optional; add a title and set the width and height of the chart
+    var options = { title: "My Average Day", width: 550, height: 400 };
+
+    // Display the chart inside the <div> element with id="piechart"
+    var chart = new google.visualization.PieChart(
+      document.getElementById("piechart")
+    );
+    chart.draw(data, options);
+  }
+</script>
